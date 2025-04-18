@@ -18,7 +18,7 @@ RUN apk add --no-cache \
     uuidgen
 
 # Create the working directory for Nezha Agent
-RUN mkdir -p /app/nezha && cd /app/nezha
+RUN mkdir -p /usr/local/bin/nezha && cd /usr/local/bin/nezha
 
 # Download and extract the Nezha Agent binary
 RUN wget $AGENT_URL -O nezha-agent.zip && \
@@ -27,11 +27,11 @@ RUN wget $AGENT_URL -O nezha-agent.zip && \
     rm -f nezha-agent.zip
 
 # Copy the setup configuration script
-COPY setup-config.sh /app/nezha/setup-config.sh
-RUN chmod +x /app/nezha/setup-config.sh
+COPY setup-config.sh /usr/local/bin/nezha/setup-config.sh
+RUN chmod +x /usr/local/bin/nezha/setup-config.sh
 
 # Set working directory
-WORKDIR /app/nezha
+WORKDIR /usr/local/bin/nezha
 
 # Set default command to execute the setup script and start the agent
 CMD ["./setup-config.sh", "&&", "./nezha-agent", "-c", "config.yml"]
