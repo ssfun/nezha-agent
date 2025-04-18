@@ -51,7 +51,7 @@ docker run -d \
 | `SERVER`                  | Nezha 服务器的地址和端口           | 是    | *无默认值，必须提供* |
 | `UUID`                    | UUID                              | 否    | *如果未提供则随机生成*|
 | `DEBUG`                   | 启用调试模式                       | 否    | `true`           |
-| `DISABLE_AUTO_UPDATE`     | 禁用自动更新                       | 是   | `true`           |
+| `DISABLE_AUTO_UPDATE`     | 禁用自动更新                       | 否   | `true`           |
 | `DISABLE_COMMAND_EXECUTE` | 禁用命令执行                       | 否    | `false`           |
 | `DISABLE_FORCE_UPDATE`    | 禁用强制更新                       | 否    | `true`        |
 | `DISABLE_NAT`             | 禁用 NAT                          | 否    | `false`           |
