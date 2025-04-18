@@ -38,7 +38,7 @@ server: $SERVER
 skip_connection_count: ${SKIP_CONNECTION_COUNT:-false}
 skip_procs_count: ${SKIP_PROCS_COUNT:-false}
 temperature: ${TEMPERATURE:-false}
-tls: ${TLS:-false}
+tls: ${TLS:-true}
 use_gitee_to_upgrade: ${USE_GITEE_TO_UPGRADE:-false}
 use_ipv6_country_code: ${USE_IPV6_COUNTRY_CODE:-false}
 uuid: $UUID
