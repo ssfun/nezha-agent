@@ -1,23 +1,28 @@
 #!/bin/bash
 
-# Default values or skip setting if not provided
+# Default values for environment variables if not provided
 CLIENT_SECRET=${CLIENT_SECRET:-""}
 SERVER=${SERVER:-""}
 
 # Check for required environment variables
 if [ -z "$CLIENT_SECRET" ] || [ -z "$SERVER" ]; then
   echo "CLIENT_SECRET or SERVER not provided. Configuration will be set at runtime."
-fi  # Closing the if statement
-
-# Generate UUID if not provided
-if command -v uuidgen >/dev/null 2>&1; then
-  UUID=${UUID:-$(uuidgen)}
-else
-  echo "uuidgen not found, using fallback method to generate UUID."
-  UUID=${UUID:-$(cat /proc/sys/kernel/random/uuid 2>/dev/null || openssl rand -hex 16 | sed 's/^\(.\{8\}\)\(.\{4\}\)\(.\{4\}\)\(.\{4\}\)\(.\{12\}\)$/\1-\2-\3-\4-\5/') }
 fi
 
-# Print UUID
+# UUID generation logic: prioritize environment variable, then fallback to generation
+if [ -n "$UUID" ]; then
+  echo "Using provided UUID from environment variable."
+else
+  echo "No UUID provided in environment variable, generating a new one..."
+  if command -v uuidgen >/dev/null 2>&1; then
+    UUID=$(uuidgen)
+  else
+    echo "uuidgen not found, using fallback method to generate UUID."
+    UUID=$(cat /proc/sys/kernel/random/uuid 2>/dev/null || openssl rand -hex 16 | sed 's/^\(.\{8\}\)\(.\{4\}\)\(.\{4\}\)\(.\{4\}\)\(.\{12\}\)$/\1-\2-\3-\4-\5/')
+  fi
+fi
+
+# Print the UUID being used
 echo "Your UUID: $UUID"
 
 # Create config.yml with the provided or default settings
