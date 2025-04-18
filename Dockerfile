@@ -18,20 +18,19 @@ RUN apk add --no-cache \
     uuidgen
 
 # Create the working directory for Nezha Agent
-RUN mkdir -p /usr/local/bin/nezha && cd /usr/local/bin/nezha
+WORKDIR /usr/local/bin/nezha
 
-# Download and extract the Nezha Agent binary
-RUN wget $AGENT_URL -O nezha-agent.zip && \
-    unzip nezha-agent.zip && \
+# Download and extract the Nezha Agent binary with error checking
+RUN echo "Downloading Nezha Agent from ${AGENT_URL}" && \
+    wget -O nezha-agent.zip "${AGENT_URL}" || { echo "Download failed"; exit 1; } && \
+    unzip nezha-agent.zip || { echo "Unzip failed"; exit 1; } && \
     chmod +x nezha-agent && \
-    rm -f nezha-agent.zip
+    rm -f nezha-agent.zip && \
+    ls -l /usr/local/bin/nezha/nezha-agent || { echo "Binary not found"; exit 1; }
 
 # Copy the setup configuration script
 COPY setup-config.sh /usr/local/bin/nezha/setup-config.sh
 RUN chmod +x /usr/local/bin/nezha/setup-config.sh
 
-# Set working directory
-WORKDIR /usr/local/bin/nezha
-
 # Set default command to execute the setup script and start the agent
-CMD ["./setup-config.sh", "&&", "./nezha-agent", "-c", "config.yml"]
+CMD ["sh", "-c", "./setup-config.sh && ./nezha-agent -c config.yml"]
