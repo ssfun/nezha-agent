@@ -21,7 +21,7 @@ fi
 echo "Your UUID: $UUID"
 
 # Create config.yml with the provided or default settings
-cat <<EOF > /usr/local/bin/nezha/config.yml
+cat <<EOF > /app/nezha/config.yml
 client_secret: $CLIENT_SECRET
 debug: ${DEBUG:-true}
 disable_auto_update: ${DISABLE_AUTO_UPDATE:-true}
