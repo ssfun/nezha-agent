@@ -53,7 +53,7 @@ docker run -d \
 | `DEBUG`                   | 启用调试模式                       | 否    | `true`           |
 | `DISABLE_AUTO_UPDATE`     | 禁用自动更新                       | 是   | `true`           |
 | `DISABLE_COMMAND_EXECUTE` | 禁用命令执行                       | 否    | `false`           |
-| `DISABLE_FORCE_UPDATE`    | 禁用强制更新                       | 是    | `true`        |
+| `DISABLE_FORCE_UPDATE`    | 禁用强制更新                       | 否    | `true`        |
 | `DISABLE_NAT`             | 禁用 NAT                          | 否    | `false`           |
 | `DISABLE_SEND_QUERY`      | 禁用发送查询                       | 否    | `false`           |
 | `GPU`                     | 启用 GPU 监控                      | 否    | `false`           |
