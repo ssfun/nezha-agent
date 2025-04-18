@@ -27,7 +27,7 @@ RUN wget $AGENT_URL -O nezha-agent.zip && \
     rm -f nezha-agent.zip
 
 # Copy the setup configuration script
-COPY start.sh /app/nezha/setup-config.sh
+COPY setup-config.sh /app/nezha/setup-config.sh
 RUN chmod +x /app/nezha/setup-config.sh
 
 # Set working directory
